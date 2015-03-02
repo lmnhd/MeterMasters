@@ -1,0 +1,101 @@
+﻿<!-- ko with: user-->
+<div id="user-content">
+    <h1>Hello <span data-bind="text: userName"></span> </h1>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#user-info" aria-expanded="false" aria-controls="collapse" >My Info
+    </button>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#submit" aria-expanded="false" aria-controls="collapse">
+        My Pending Mixes
+    </button>
+    <div id="user-info" class="collapse">
+        <div class="well-sm">
+            <form id="client-info" class="" action="#/UpdateInfo" method="POST">
+                <input type="hidden" data-bind="value: userID" name="userid" />
+                <input type="hidden" data-bind="value: clientID" name="id" />
+                <div class="form-group">
+                    @Html.Label("Name")
+                    @Html.TextBox("Name", "", new { data_bind = "value: userName", @class = "form-control" })
+                </div>
+                <div class="form-group has-success has-feedback">
+                    @Html.Label("Contact Email")
+                    <input type="email" data-bind="value: myEmail" name="email" class="form-control" />
+
+                </div>
+                <div class="form-group">
+                    @Html.Label("Home Town")
+                    @Html.TextBox("Hometown", "", new { data_bind = "value: myHomeTown", @class = "form-control" })
+                </div>
+
+
+
+
+                <input type="submit" class="btn btn-success" value="Save" />
+            </form>
+        </div>
+
+    </div>
+    <div id="submit" class="collapse">
+        <div class="well-sm">
+            <form  id="request-info" class="" action="#/submitmix" method="POST" data-bind="with: currentRequest">
+                <input type="hidden" data-bind="value: id" name="userid" />
+               
+                <div class="form-group">
+                    @Html.Label("Title")
+                    @Html.TextBox("title", "", new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.Label("Link to files")
+                    <input type="url" name="uploadlink" class="form-control" />
+
+                </div>
+                <div id="versiontype" class="form-group-lg">
+                    @Html.Label("Versions Needed (3 included with price)")
+                    <select class="form-control" data-bind="options: VersionTypes,selectedOptions: ChosenVersions" size="4" multiple="true" name="VersionTypes"></select>
+                </div>
+                <div id="mixtype" class="form-group-lg">
+                    @Html.Label("MixType")                                                                                                      
+                    <div class="form-control">
+                        <input type="radio" name="MyMixType" value="0" data-bind="checked: MyMixType" /> All Tracks
+                    </div>
+                    <div class="form-control">
+                        <input type="radio" name="MyMixType" value="1" data-bind="checked: MyMixType" /> Vocals Only
+                    </div>
+                    <div class="form-control">
+                        <input type="radio" name="MyMixType" value="2" data-bind="checked: MyMixType" /> Track Only
+                    </div>
+                    
+                </div>
+                <div class="form-group">
+                    @Html.Label("Genre")
+                    @Html.TextBox("genre", "", new {  @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.Label("Allow Sound Replacement")
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="canmodifysounds" value=""/>
+                            Allow us to alter or replace samples/sounds to enhance audio quality
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group invisible">
+                    @Html.Label("Sound Replacement Exceptions")
+                    @Html.TextArea("modifynotes",new{@class="form-control"})
+                </div>
+                <div class="form-group">
+                    @Html.Label("Special Notes")
+                    @Html.TextArea("clientnotes", new { @class = "form-control" })
+                </div>
+
+
+
+
+                <input type="submit" class="btn btn-success" value="Submit" />
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+
+<!-- /ko -->

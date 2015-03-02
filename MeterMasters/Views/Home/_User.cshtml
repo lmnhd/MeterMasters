@@ -1,0 +1,160 @@
+﻿<!-- ko with: user-->
+<div id="user-content">
+    <h1>Hello <span data-bind="text: userName"></span> </h1>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#user-info" aria-expanded="false" aria-controls="collapse" >My Info
+    </button>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#pending-requests" aria-expanded="false" aria-controls="collapse">Pending Requests</button>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#submit" aria-expanded="false" aria-controls="collapse">
+        Submit Mix Request
+    </button>
+
+    <div id="user-info" class="collapse">
+        <div class="well-sm">
+            <form id="client-info" class="" action="#/UpdateInfo" method="POST">
+                <input type="hidden" data-bind="value: userID" name="userid" />
+                <input type="hidden" data-bind="value: clientID" name="id" />
+                <div class="form-group">
+                    @Html.Label("Name")
+                    @Html.TextBox("Name", "", new { data_bind = "value: userName", @class = "form-control" })
+                </div>
+                <div class="form-group has-success has-feedback">
+                    @Html.Label("Contact Email")
+                    <input type="email" data-bind="value: myEmail" name="email" class="form-control" />
+
+                </div>
+                <div class="form-group">
+                    @Html.Label("Home Town")
+                    @Html.TextBox("Hometown", "", new { data_bind = "value: myHomeTown", @class = "form-control" })
+                </div>
+
+
+
+
+                <input type="submit" class="btn btn-success" value="Save" />
+            </form>
+        </div>
+
+    </div>
+    <div id="pending-requests" class="collapse">
+        <div id="Pending Requests" data-bind="if: mixRequests().length > 0">
+            <table class="table table-bordered  ">
+                <thead class="well-sm"><tr><th>Date</th><th>Title</th><th>MixType</th><th>Allow Sound Replacement/Modification</th></tr></thead>
+                <tbody data-bind="foreach: mixRequests">
+                    <tr>
+                        <td data-bind="text: entryTime"></td>
+                        <td data-bind="text: title"></td>
+                        <td data-bind="text: $parent.getMixType(myMixType)"></td>
+                        <td data-bind="text: $parent.canModifySounds(canModifySounds)"></td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+    <div id="submit" class="collapse">
+        
+        <div class="well-sm">
+            <form id="request-info" class="" action="#/submitmix" method="POST" data-bind="with: currentRequest">
+                <input type="hidden" data-bind="value: $parent.userID" name="clientUserId" />
+                <input type="hidden" data-bind="value: $parent.clientID" name="clientId" />
+
+                <div class="form-group">
+                    @Html.Label("Title")
+                    @*<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>*@
+                    @Html.TextBox("title", "", new { @class = "form-control", required= "" })
+
+                </div>
+                <div class="form-group has-success has-feedback">
+                    @Html.Label("Link to audio files")
+                    @*<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>*@
+                    <input type="url" name="uploadlink" class="form-control" required="" />
+                    @*<span class="help-block">Please enter a valid link address</span>*@
+
+
+                </div>
+                <div id="Archive Type" class="form-group">
+                    @Html.Label("Archive Type")
+                    <label class="form-control radio">
+                        <input type="radio" name="ArchiveType" value="0" data-bind="checked: ArchiveType" required />Original Session
+                    </label>
+                    <label class="form-control radio">
+                        <input type="radio" name="ArchiveType" value="1" data-bind="checked: ArchiveType" checked="checked" required />Consolidated Wave Files
+                    </label>
+                </div>
+                <div id="DAW" class="form-group" data-bind="if: ArchiveType() != 1">
+                    @Html.Label("Program/DAW used")
+                    <div class="form-control radio">
+                        <input type="radio" name="DAW" value="0" data-bind="checked: DAW" required />Pro Tools
+                    </div>
+                    <div class="form-control radio">
+                        <input type="radio" name="DAW" value="1" data-bind="checked: DAW" required />Cubase
+                    </div>
+                    <div class="form-control radio">
+                        <input type="radio" name="DAW" value="2" data-bind="checked: DAW" required />Cakewalk
+                    </div>
+                    <div class="form-control radio">
+                        <input type="radio" name="DAW" value="3" data-bind="checked: DAW" required />Nuendo
+                    </div>
+                    @*<div class="form-control radio">
+                            <input type="radio" name="DAW" value="4" data-bind="checked: DAW" />Garageband
+                        </div>*@
+                    <div class="form-control radio">
+                        <input type="radio" name="DAW" value="5" data-bind="checked: DAW" />FL Studio
+                    </div>
+
+                </div>
+                <div id="mixtype" class="form-group-lg">
+                    @Html.Label("MixType")
+                    <label class="form-control radio">
+                        <input type="radio" name="myMixType" value="0" data-bind="checked: myMixType" required /> All Tracks
+                    </label>
+                    <label class="form-control radio">
+                        <input type="radio" name="myMixType" value="1" data-bind="checked: myMixType" /> Vocals Only
+                    </label>
+                    <label class="form-control radio">
+                        <input type="radio" name="myMixType" value="2" data-bind="checked: myMixType" /> Track Only
+                    </label>
+
+                </div>
+                <div id="versiontype" class="form-group-lg">
+                    @Html.Label("Extra Versions Needed (2 included with price - $5 per version after 2)")
+                    <select class="form-control" data-bind="options: VersionTypes,selectedOptions: ChosenVersions" size="4" multiple="true" name="VersionTypes"></select>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Genre")
+                    @Html.TextBox("genre", "", new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.Label("Allow Sound Replacement")
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="CanModifySounds" value="true" data-bind="checked: canModifySounds" />
+                            Allow us to alter or replace samples/sounds to enhance audio quality
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group invisible">
+                    @Html.Label("Sound Replacement Exceptions")
+                    @Html.TextArea("modifynotes", new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.Label("Special Notes")
+                    @Html.TextArea("clientNotes", new { @class = "form-control", data_bind = "text: clientNotes" })
+                </div>
+
+
+
+
+                <input type="submit" class="btn btn-success" value="Submit" />
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+
+<!-- /ko -->

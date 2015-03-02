@@ -1,0 +1,309 @@
+﻿@import 'Site.css';
+$maincolor: #fff;
+$maincolor2: rgb(255, 0, 0);
+$bgcolor: hsla(0, 0%, 23.5%, 0.36);
+$bgcolor2: hsla(0, 100%, 50%, 0.46);
+$bgcolor3:rgba(107, 13, 13, 0.73);
+$bgimage1: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIBAMAAAA2IaO4AAAAGFBMVEUTExMVFRUaGhobGxscHBwdHR0iIiIkJCR4oQkmAAAAH0lEQVQI12MsZzjLwMQABCz3YCxGJQYXKIuBwRjCAgBofAOYnNFVRwAAAABJRU5ErkJggg=='); /*/images/micro_carbon_2X.png*/
+$fontstack: "Century Gothic";
+
+body {
+    background-image: $bgimage1;
+    color: $maincolor;
+    /*background-color: $bgcolor;*/
+    font-family: $fontstack;
+} 
+
+.jumbotron {
+    background-color: $bgcolor2;
+    color: $maincolor;
+}
+
+@-moz-keyframes myfirst {
+    from {
+        width: 20%;
+    }
+
+    to {
+        width: 80%;
+    }
+}
+
+@-webkit-keyframes myfirst {
+    from {
+        width: 20%;
+    }
+
+    to {
+        width: 80%;
+    }
+}
+
+@keyframes myfirst {
+    from {
+        width: 20%;
+    }
+
+    to {
+        width: 80%;
+    }
+}
+#info-header{
+    background-color:rgba(255, 255, 255, 0.79);
+    border-top:thin solid white;
+    text-align:right;
+    border-left:thick solid white;
+    color:$maincolor2;
+    margin-left:auto;
+    //width:40%;
+    padding:.5em;
+    font-weight:800;
+}
+#info-container table, th, td{
+    //background-color:rgba(255, 0, 0, 0.22);
+    border-bottom:thin solid white;
+    border-radius:20px;
+    padding:.3em;
+}
+.bigmessage {
+    font-size: 3em;
+    font-weight: 800;
+    text-align: right;
+    background-color: $bgcolor2;
+    padding: .3em;
+    margin: .3em;
+    border-radius: 20px;
+    box-shadow:5px 5px 5px #000;
+    min-height:350px;
+}
+
+.bigmessageleft {
+    font-size: 3em;
+    font-weight: 800;
+    text-align: left;
+    background-color: $bgcolor2;
+    padding: .3em;
+    margin: .3em;
+    border-radius: 20px;
+    box-shadow:5px 5px 5px #000;
+    min-height:350px;
+    /*border: thin double white;
+    -moz-background-clip: content-box;
+    -webkit-background-clip: content-box;
+    background-clip: content-box;*/
+}
+#info-container{
+    
+    min-height:500px;
+    background-color:rgba(60, 60, 60, 0.36);
+    border-radius: 20px;
+    border:thin solid white;
+    margin: .3em;
+    font-size: 3em;
+    font-weight:400;
+    padding:.3em;
+
+}
+#info-container p{
+    width:60%;
+    text-align:right;
+    margin-left:auto;
+    background-color:hsla(0, 0%, 23%, 0.50);
+    border-left:solid thin rgba(255, 0, 0, 0.46);
+}
+#info-container ul{
+    //width:50%;
+    //text-align:right;
+    margin-left:auto;
+    background-color:$bgcolor;
+}
+
+.informative{
+    background-color:rgba(107, 13, 13, 0.73)
+}
+.well-sm{
+    background-color:hsla(0, 0%, 23.5%, 0.36);
+}
+#musicindustry{
+
+     border: thin solid black;
+    border-radius: 25px;
+   background-color:$bgcolor;
+    padding: 0.3em;
+    width: 95%;
+}
+#musicindustry strong{
+    text-align:right;
+    margin-left:auto;
+    display:block;
+    //background-color:black;
+    width:50%;
+    color:$maincolor2;
+}
+.infotext{
+    font-size:medium;
+
+}
+.bigmessage img, .bigmessageleft img{
+    display:inline-block;
+    padding: 1px;
+
+}
+.bigmessageleft p{
+    //margin-bottom:1em;
+}
+.messageleftbtn{
+    margin-bottom:2em;
+}
+.bigmessage h1, p{
+    //width:60%;
+}
+.meter {
+    height: 10px;
+    width: 100px;
+    margin: .1em 3em .1em 3em;
+    background: #d3080b;
+    background: -moz-linear-gradient(left, #d3080b 1%, #808080 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(1%,#d3080b), color-stop(100%,#808080));
+    background: -webkit-linear-gradient(left, #d3080b 1%,#808080 100%);
+    background: -o-linear-gradient(left, #d3080b 1%,#808080 100%);
+    background: -ms-linear-gradient(left, #d3080b 1%,#808080 100%);
+    background: linear-gradient(to right, #d3080b 1%,#808080 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d3080b', endColorstr='#2ee819',GradientType=1 );
+}
+
+.metersright {
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.metersleft {
+    
+}
+
+.meter1 {
+    -webkit-animation: myfirst .4s;
+    -moz-animation: myfirst .4s;
+    -o-animation: myfirst .4s;
+    animation: myfirst .4s;
+    -webkit-animation-play-state: running;
+    -moz-animation-play-state: running;
+    -o-animation-play-state: running;
+    
+    animation-play-state: running;
+    -moz-animation-direction: alternate;
+    -o-animation-direction: alternate;
+    -webkit-animation-direction: alternate;
+    animation-direction: alternate;
+    -moz-animation-iteration-count: infinite;
+    -o-animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+}
+
+.meter2 {
+    -webkit-animation: myfirst .6s;
+    -moz-animation: myfirst .6s;
+    -o-animation: myfirst .6s;
+    animation: myfirst .6s;
+    -webkit-animation-play-state: running;
+    -moz-animation-play-state: running;
+    -o-animation-play-state: running;
+   
+    animation-play-state: running;
+    -moz-animation-direction: alternate;
+    -o-animation-direction: alternate;
+    -webkit-animation-direction: alternate;
+    animation-direction: alternate;
+    -moz-animation-iteration-count: infinite;
+    -o-animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+}
+
+.meter3 {
+    -webkit-animation: myfirst .35s;
+    -moz-animation: myfirst .35s;
+    -o-animation: myfirst .35s;
+    animation: myfirst .35s;
+    -webkit-animation-play-state: running;
+    -moz-animation-play-state: running;
+    -o-animation-play-state: running;
+    
+    animation-play-state: running;
+    -moz-animation-direction: alternate;
+    -o-animation-direction: alternate;
+    -webkit-animation-direction: alternate;
+    animation-direction: alternate;
+    -moz-animation-iteration-count: infinite;
+    -o-animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+}
+
+.meter4 {
+    -webkit-animation: myfirst .53s;
+    -moz-animation: myfirst .53s;
+    -o-animation: myfirst .53s;
+    animation: myfirst .53s;
+    -webkit-animation-play-state: running;
+    -moz-animation-play-state: running;
+    -o-animation-play-state: running;
+   
+    animation-play-state: running;
+    -moz-animation-direction: alternate;
+    -o-animation-direction: alternate;
+    -webkit-animation-direction: alternate;
+    animation-direction: alternate;
+    -moz-animation-iteration-count: infinite;
+    -o-animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+}
+
+.meter5 {
+    -webkit-animation: myfirst .57s;
+    -moz-animation: myfirst .57s;
+    -o-animation: myfirst .57s;
+    animation: myfirst .57s;
+    -webkit-animation-play-state: running;
+    -moz-animation-play-state: running;
+    -o-animation-play-state: running;
+    
+    animation-play-state: running;
+    -moz-animation-direction: alternate;
+    -o-animation-direction: alternate;
+    -webkit-animation-direction: alternate;
+    animation-direction: alternate;
+    -moz-animation-iteration-count: infinite;
+    -o-animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+}
+
+.visible{
+    display:block;
+
+    -moz-transition-property: display;
+    -o-transition-property: display;
+    -webkit-transition-property: display;
+    transition-property: display;
+    -moz-transition-duration: 1s;
+    -o-transition-duration: 1s;
+    -webkit-transition-duration: 1s;
+    transition-duration: 1s;
+}
+.invisible {
+    display:  none;
+    -moz-transition-property: display;
+    -o-transition-property: display;
+    -webkit-transition-property: display;
+    transition-property: display;
+    -moz-transition-duration: 1s;
+    -o-transition-duration: 1s;
+    -webkit-transition-duration: 1s;
+    transition-duration: 1s;
+}
