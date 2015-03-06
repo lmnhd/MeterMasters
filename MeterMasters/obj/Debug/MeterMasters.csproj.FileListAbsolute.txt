@@ -63,3 +63,5 @@ E:\Users\New User\Documents\GitHub\MeterMasters\MeterMasters\obj\Debug\MeterMast
 E:\Users\New User\Documents\GitHub\MeterMasters\MeterMasters\obj\Debug\MeterMasters.pdb
 E:\Users\New User\Documents\GitHub\MeterMasters\MeterMasters\bin\MMUserContext.dll
 E:\Users\New User\Documents\GitHub\MeterMasters\MeterMasters\bin\MMUserContext.pdb
+E:\Users\New User\Documents\GitHub\MeterMasters\MeterMasters\bin\WePaySDK.dll
+E:\Users\New User\Documents\GitHub\MeterMasters\MeterMasters\bin\WePaySDK.pdb

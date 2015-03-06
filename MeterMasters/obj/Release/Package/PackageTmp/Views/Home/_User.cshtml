@@ -1,12 +1,16 @@
 ﻿<!-- ko with: user-->
 <div id="user-content">
     <h1>Hello <span data-bind="text: userName"></span> </h1>
-    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#user-info" aria-expanded="false" aria-controls="collapse" >My Info
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#user-info" aria-expanded="false" aria-controls="collapse">
+        My Info
     </button>
+    <button class="btn btn-primary" data-bind="visible: mixRequests().length > 0" type="button" data-toggle="collapse" data-target="#pending-requests" aria-expanded="false" aria-controls="collapse">Pending Requests</button>
     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#submit" aria-expanded="false" aria-controls="collapse">
-        My Pending Mixes
+        Submit Mix Request
     </button>
+
     <div id="user-info" class="collapse">
+        <div class="h2">My Info</div>
         <div class="well-sm">
             <form id="client-info" class="" action="#/UpdateInfo" method="POST">
                 <input type="hidden" data-bind="value: userID" name="userid" />
@@ -33,57 +37,136 @@
         </div>
 
     </div>
+    <div id="pending-requests" class="collapse" data-bind="visible: mixRequests().length > 0">
+        <div class="h2">Currently Pending</div>
+        <div class="well-sm" data-bind="if: mixRequests().length > 0">
+            <table class="table table-bordered  ">
+                <thead class="well-sm">
+                    <tr>
+                        <th>Date</th>
+                        <th>Title</th>
+                        <th>MixType</th>
+                        <th>Allow Sound Modification</th>
+                        <th>Cancel</th>
+
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: mixRequests">
+                    <tr>
+                        <td data-bind="text: $parent.getFormattedDate(entryTime)"></td>
+                        <td data-bind="text: title"></td>
+                        <td data-bind="text: $parent.getMixType(myMixType)"></td>
+                        <td data-bind="text: $parent.canModifySounds(canModifySounds)"></td>
+                        <th><button type="button" class="btn btn-danger" data-bind="click: $parent.cancelRequest">cancel</button></th>
+                    </tr>
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
     <div id="submit" class="collapse">
+        <div class="h2">Mix Submission Form</div>
         <div class="well-sm">
-            <form  id="request-info" class="" action="#/submitmix" method="POST" data-bind="with: currentRequest">
-                <input type="hidden" data-bind="value: id" name="userid" />
-               
+            <form id="request-info" class="" action="#/submitmix" method="POST" data-bind="with: currentRequest">
+                <input type="hidden" data-bind="value: $parent.userID" name="clientUserId" />
+                <input type="hidden" data-bind="value: $parent.clientID" name="clientId" />
+
                 <div class="form-group">
-                    @Html.Label("Title")
-                    @Html.TextBox("title", "", new { @class = "form-control" })
+                    @Html.Label("Song/Track Title")
+                    @*<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>*@
+                    @Html.TextBox("title", "", new { @class = "form-control", required= "" ,data_bind="text: title"})
+
                 </div>
-                <div class="form-group">
-                    @Html.Label("Link to files")
-                    <input type="url" name="uploadlink" class="form-control" />
+                <div class="form-group has-success has-feedback">
+                   
+                    @Html.Label("Link to wave/session files")
+                    <i class="glyphicon glyphicon-info-sign" rel="tooltip" title="The URL to the zip/rar archive for us to download" id="link-info-icon"></i>
+                    @*<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>*@
+                    <input type="url" name="uploadlink" class="form-control" required=""  />
+                    @*<span class="help-block">Please enter a valid link address</span>*@
+
+
+                </div>
+                <div id="Archive Type" class="form-group-lg">
+                    @Html.Label("File Archive Type")
+                    <i class="glyphicon glyphicon-info-sign" rel="tooltip" title="What is contained in the zip/rar files for mixing...This could be the original session or the rendered individual tracks in WAVE format." id="archive-info-icon"></i>
+                    <label class="form-control radio">
+                        <input type="radio" name="ArchiveType" value="0" data-bind="checked: ArchiveType" required />Original Session
+                    </label>
+                    <label class="form-control radio">
+                        <input type="radio" name="ArchiveType" value="1" data-bind="checked: ArchiveType" checked="checked" required />Consolidated Wave Files
+                    </label>
+                </div>
+                <div id="DAW" class="form-group-lg" data-bind="if: ArchiveType() != 1">
+                    @Html.Label("Program/DAW used")
+                    <i class="glyphicon glyphicon-info-sign" rel="tooltip" title="Which program or workstation was used for recording? Remember that we cannot extract consolidated WAVE files from every program/DAW." id="daw-info-icon"></i>
+                    <div class="form-control radio">
+                        <input type="radio" name="DAW" value="0" data-bind="checked: DAW" required />Pro Tools
+                    </div>
+                    <div class="form-control radio">
+                        <input type="radio" name="DAW" value="1" data-bind="checked: DAW" required />Cubase
+                    </div>
+                    <div class="form-control radio">
+                        <input type="radio" name="DAW" value="2" data-bind="checked: DAW" required />Cakewalk
+                    </div>
+                    <div class="form-control radio">
+                        <input type="radio" name="DAW" value="3" data-bind="checked: DAW" required />Nuendo
+                    </div>
+                    @*<div class="form-control radio">
+                            <input type="radio" name="DAW" value="4" data-bind="checked: DAW" />Garageband
+                        </div>*@
+                    <div class="form-control radio">
+                        <input type="radio" name="DAW" value="5" data-bind="checked: DAW" />FL Studio
+                    </div>
+
+                </div>
+                <div id="mixtype" class="form-group-lg">
+                    @Html.Label("MixType")
+                    <i class="glyphicon glyphicon-info-sign" rel="tooltip" title="Which tracks need to be mixed? Sometimes the music is a premixed stereo track in which case only the vocals need to be mixed. Other times, there are no vocals at all (only instrument tracks). The price may vary depending on the mix type." id="mixtype-info-icon"></i>
+                    <label class="form-control radio">
+                        <input type="radio" name="myMixType" value="0" data-bind="checked: myMixType" required /> Music and Vocals
+                    </label>
+                    <label class="form-control radio">
+                        <input type="radio" name="myMixType" value="1" data-bind="checked: myMixType" /> Vocals Only
+                    </label>
+                    <label class="form-control radio">
+                        <input type="radio" name="myMixType" value="2" data-bind="checked: myMixType" /> Instruments/Music Only
+                    </label>
 
                 </div>
                 <div id="versiontype" class="form-group-lg">
-                    @Html.Label("Versions Needed (3 included with price)")
+                    @Html.Label("Extra Versions Needed (2 included with price - $5 per version after 2)")
+                    <i class="glyphicon glyphicon-info-sign" rel="tooltip" title="Select as many alternate versions as needed keeping in mind that the first two only are included in the initial mix price. Alternate versions not included will be $5.00 per version" id="mixtype-info-icon"></i>
                     <select class="form-control" data-bind="options: VersionTypes,selectedOptions: ChosenVersions" size="4" multiple="true" name="VersionTypes"></select>
                 </div>
-                <div id="mixtype" class="form-group-lg">
-                    @Html.Label("MixType")                                                                                                      
-                    <div class="form-control">
-                        <input type="radio" name="MyMixType" value="0" data-bind="checked: MyMixType" /> All Tracks
-                    </div>
-                    <div class="form-control">
-                        <input type="radio" name="MyMixType" value="1" data-bind="checked: MyMixType" /> Vocals Only
-                    </div>
-                    <div class="form-control">
-                        <input type="radio" name="MyMixType" value="2" data-bind="checked: MyMixType" /> Track Only
-                    </div>
-                    
-                </div>
+
                 <div class="form-group">
                     @Html.Label("Genre")
-                    @Html.TextBox("genre", "", new {  @class = "form-control" })
+                    <i class="glyphicon glyphicon-info-sign" rel="tooltip" title="What style of music is this?" id="genre-info-icon"></i>
+                    @Html.TextBox("genre", "", new { @class = "form-control" , placeholder="Example: Hip-Hop"})
                 </div>
                 <div class="form-group">
                     @Html.Label("Allow Sound Replacement")
+                    <i class="glyphicon glyphicon-info-sign" rel="tooltip" title="(Instrumentation Only!) If checked, we will alter or replace sounds if we feel it would make the mix better, without changing the core magic of the track" id="soundreplacement-info-icon"></i>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" name="canmodifysounds" value=""/>
+                            <input type="checkbox" name="CanModifySounds" value="true" data-bind="checked: canModifySounds" />
                             Allow us to alter or replace samples/sounds to enhance audio quality
                         </label>
                     </div>
                 </div>
-                <div class="form-group invisible">
+
+                <div class="form-group " data-bind="if: canModifySounds">
                     @Html.Label("Sound Replacement Exceptions")
-                    @Html.TextArea("modifynotes",new{@class="form-control"})
+                    <i class="glyphicon glyphicon-info-sign" rel="tooltip" title="If there are any suggestions or exceptions to our allowance to change instrument sounds" id="exceptions-info-icon"></i>
+                    @Html.TextArea("modifynotes", new { @class = "form-control",placeholder="Example: do not change the snare sound or piano sound" })
+
+
                 </div>
                 <div class="form-group">
                     @Html.Label("Special Notes")
-                    @Html.TextArea("clientnotes", new { @class = "form-control" })
+                    @Html.TextArea("clientNotes", new { @class = "form-control", data_bind = "text: clientNotes" ,placeholder="Example: mix the vocals slightly louder than the music."})
                 </div>
 
 
@@ -93,6 +176,62 @@
             </form>
         </div>
 
+    </div>
+    <div id="post-request-modal" class="modal fade mmmodal">
+        <div id="postrequestmodal" class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Request Sent!</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Your submission will be reviewed as soon as possible.</p>
+                    <p>You will be notified at <span data-bind="text: myEmail"></span> after acceptance or if there are any issues.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="cancel-request-modal" class="modal fade mmmodal">
+        <div id="cancelrequestmodal" class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Cancel Request</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to cancel this mix request?</p>
+                    <p id="cancelled-mix-title" class="warning"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    <button id="confirm-cancel-request" type="button" class="btn btn-primary">Yes, Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="general-info-modal" class="modal fade mmmodal">
+        <div id="generalinfomodal" class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <p></p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

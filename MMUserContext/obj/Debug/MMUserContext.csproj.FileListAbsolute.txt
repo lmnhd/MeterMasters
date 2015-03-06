@@ -20,3 +20,5 @@ E:\Users\New User\Documents\GitHub\MeterMasters\MMUserContext\obj\Debug\MMUserCo
 E:\Users\New User\Documents\GitHub\MeterMasters\MMUserContext\obj\Debug\MMUserContext.Migrations.AddClientUserId.resources
 E:\Users\New User\Documents\GitHub\MeterMasters\MMUserContext\obj\Debug\MMUserContext.Migrations.AddDAW.resources
 E:\Users\New User\Documents\GitHub\MeterMasters\MMUserContext\obj\Debug\MMUserContext.Migrations.AddRequests.resources
+E:\Users\New User\Documents\GitHub\MeterMasters\MMUserContext\obj\Debug\MMUserContext.Migrations.AddActiveRequest.resources
+E:\Users\New User\Documents\GitHub\MeterMasters\MMUserContext\obj\Debug\MMUserContext.Migrations.AddMixCostItemization.resources

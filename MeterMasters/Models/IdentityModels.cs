@@ -31,5 +31,7 @@ namespace MeterMasters.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<MMUserContext.Entities.MixRequest> MixRequests { get; set; }
     }
 }

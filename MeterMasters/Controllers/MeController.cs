@@ -121,11 +121,25 @@ namespace MeterMasters.Controllers
         }
 
         [HttpPost]
+        [Route("api/Me/CancelRequest")]
+        public bool CancelRequest(MixRequest request)
+        {
+           
+             return _unit.CancelRequest(request);
+            
+        }
+
+       
+
+        [HttpPost]
         [Route("api/Me/SubmitMix")]
         public MixRequest SubmitMix(MixRequest request)
         {
             request.EntryTime = DateTime.Now;
             request.AcceptanceTime = DateTime.Now;
+            request.MixCancelled = false;
+            request.MixComplete = false;
+            request.Active = true;
             
            return _unit.StoreMixRequest(request);
         }

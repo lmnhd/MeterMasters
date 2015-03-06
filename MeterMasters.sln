@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configura
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMUserContext", "MMUserContext\MMUserContext.csproj", "{E817F31E-2F0A-4ABC-B4C1-D33A2A95C47B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WePaySDK", "..\..\Visual Studio 2013\Projects\WePayASPNet-master\WePaySDK\WePaySDK.csproj", "{88459858-7BD4-495A-95BC-4C29CB352A85}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{E817F31E-2F0A-4ABC-B4C1-D33A2A95C47B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E817F31E-2F0A-4ABC-B4C1-D33A2A95C47B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E817F31E-2F0A-4ABC-B4C1-D33A2A95C47B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88459858-7BD4-495A-95BC-4C29CB352A85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88459858-7BD4-495A-95BC-4C29CB352A85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88459858-7BD4-495A-95BC-4C29CB352A85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88459858-7BD4-495A-95BC-4C29CB352A85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

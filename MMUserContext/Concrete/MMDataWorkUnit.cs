@@ -97,9 +97,37 @@ namespace MMUserContext.Concrete
 
         }
 
+        public Mix GetMix(int id)
+        {
+            return mixs.Find(id);
+        }
+
+        public bool CancelRequest(MixRequest request)
+        {
+            try
+            {
+               
+                if (request != null)
+                {
+                    request.MixCancelled = true;
+                    request.MixComplete = false;
+                    request.Active = false;
+                    userContext.Entry(request).State = EntityState.Modified;
+                    userContext.SaveChanges();
+
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+           
+            return true;
+        }
+
         public List<MixRequest> GetMixRequests(string userId)
         {
-            return mixRequests.Where(m => m.ClientUserId.Equals(userId)).ToList();
+            return mixRequests.Where(m => m.ClientUserId.Equals(userId)).Where(m => m.Active.Equals(true)).ToList();
         }
 
         public List<int> GetMixRequestIds(string userId)
@@ -131,6 +159,13 @@ namespace MMUserContext.Concrete
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        public List<MixRequest> GetPendingRequests()
+        {
+            var result = mixRequests.Where(r => r.Active.Equals(true));
+
+            return result.ToList();
         }
     }
 }

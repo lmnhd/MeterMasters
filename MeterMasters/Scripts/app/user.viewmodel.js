@@ -6,7 +6,7 @@ function MixRequest() {
     self.id = ko.observable(0);
     self.clientId = ko.observable(0);
     self.clientUserId = ko.observable(0);
-    self.title = ko.observable('juy');
+    self.title = ko.observable('ttttt');
     self.uploadLink = ko.observable('');
     self.canModifySounds = ko.observable(false);
     self.genre = ko.observable('');
@@ -46,7 +46,7 @@ function UserViewModel(app, dataModel) {
     self.currentRequest = ko.observable(new MixRequest());
 
     self.createMixRequest = function() { self.currentRequest(new MixRequest()); }
-   
+    
     self.getMixType = function (type) {
         switch (type) {
             case 0:
@@ -61,6 +61,42 @@ function UserViewModel(app, dataModel) {
                 return ("");
         }
     }
+    self.findRequest = function(id) {
+        for (var i = 0; i<self.mixRequests().length; i++) {
+            var req = self.mixRequests()[i];
+            if (req.id == id) {
+                return req;
+            }
+        }
+    }
+    self.cancelRequest = function(req) {
+        var request = req;
+        if (request) {
+            $('#cancelled-mix-title').text(request.title);
+            $('#cancel-request-modal').modal('show');
+            $('#confirm-cancel-request').on('click', function () {
+                $('#cancel-request-modal').modal('hide');
+                var data = JSON.stringify(request);
+                $.ajax({
+                    method: 'post',
+                    url: 'api/Me/CancelRequest',
+                    data: data,
+                    contentType: "application/json; charset=utf-8",
+                    headers: {
+                        'Authorization': 'Bearer ' + app.dataModel.getAccessToken()
+                    },
+                    success: function (data) {
+                        if(data)
+                            self.mixRequests.remove(request);
+                        var msg = request.title + ' has been cancelled';
+                        self.DisplayGeneralModal('Request cancelled',msg);
+
+                    }
+                });
+
+            });
+        }
+    }
     self.canModifySounds = function(value) {
         if (value) {
             return 'Yes';
@@ -68,10 +104,15 @@ function UserViewModel(app, dataModel) {
         return 'No';
     }
     self.getFormattedDate = function(date) {
-        var newDate = Date(date);
-      return   newDate.toLocaleDateString('en-us');
+        var newDate = new Date(date);
+        var result = newDate.toLocaleDateString('en-us') + ' at ' + newDate.toLocaleTimeString('en-us');
+        return result;
     }
-
+    self.DisplayGeneralModal = function(header,message) {
+        $('#general-info-modal').find('.modal-body').find('p').first().text(message);
+        $('#general-info-modal').find('.modal-header').find('h4').first().text(header);
+        $('#general-info-modal').modal('show');
+    }
     Sammy(function() {
 
         this.get('#user', function() {
@@ -166,6 +207,10 @@ function UserViewModel(app, dataModel) {
                 },
                 success: function(data) {
                     self.mixRequests.push(data);
+                    self.createMixRequest();
+                    $('#pending-requests').collapse('show');
+                    $('#submit').collapse('hide');
+                    $('#post-request-modal').modal('show');
                 }
             });
         });

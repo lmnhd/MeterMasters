@@ -90,6 +90,14 @@
     <Compile Include="Migrations\201502282252514_AddRequests.Designer.cs">
       <DependentUpon>201502282252514_AddRequests.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503021956047_AddActiveRequest.cs" />
+    <Compile Include="Migrations\201503021956047_AddActiveRequest.Designer.cs">
+      <DependentUpon>201503021956047_AddActiveRequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503052055451_AddMixCostItemization.cs" />
+    <Compile Include="Migrations\201503052055451_AddMixCostItemization.Designer.cs">
+      <DependentUpon>201503052055451_AddMixCostItemization.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -127,6 +135,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502282252514_AddRequests.resx">
       <DependentUpon>201502282252514_AddRequests.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503021956047_AddActiveRequest.resx">
+      <DependentUpon>201503021956047_AddActiveRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503052055451_AddMixCostItemization.resx">
+      <DependentUpon>201503052055451_AddMixCostItemization.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -65,6 +65,19 @@ body {
     border-radius:20px;
     padding:.3em;
 }
+
+#pending-requests{
+    background-color:$bgcolor;
+}
+#pending-requests thead{
+    background-color:$bgcolor2;
+}
+#main-header{
+    margin-top:2em;
+}
+.mmmodal{
+    color:black;
+}
 .bigmessage {
     font-size: 3em;
     font-weight: 800;

@@ -63,5 +63,8 @@ namespace MMUserContext.Entities
         public virtual string EngineerNotes { get; set; }
         public virtual DateTime EntryTime { get; set; }
         public virtual DateTime AcceptanceTime { get; set; }
+        public virtual bool Active { get; set; }
+        public virtual bool MixCancelled { get; set; }
+        public virtual bool MixComplete { get; set; }
     }
 }
