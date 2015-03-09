@@ -1,7 +1,8 @@
-﻿@model IEnumerable<MMUserContext.Entities.MixRequest>
+﻿@using MMUserContext.Entities
+@model IEnumerable<MMUserContext.Entities.MixRequest>
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -11,125 +12,27 @@
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
 </head>
-<body>
-    <h1>All pending requests</h1>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.MyMixType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClientUserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClientId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ArchiveType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DAW)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UploadLink)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CanModifySounds)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Genre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModifyNotes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClientNotes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EngineerNotes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EntryTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AcceptanceTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Active)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MixCancelled)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MixComplete)
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MyMixType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClientUserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClientId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ArchiveType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DAW)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UploadLink)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CanModifySounds)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifyNotes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClientNotes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EngineerNotes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EntryTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AcceptanceTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Active)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MixCancelled)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MixComplete)
-            </td>
-            <td>
-                @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
-            </td>
-        </tr>
-    }
-    
-    </table>
-</body>
+    <body data-bind="with: admin" class="body-content admin-body" >
+       
+        <h1 data-bind="text: header"></h1>
+        <div class="admin-request-list">
+            <ul class="list-group" data-bind="foreach: requests">
+                
+                <li class="list-group-item ">
+                    <span data-bind="text: $parent.getFormattedDate(EntryTime)"></span>
+
+                    <a class="btn"><span data-bind="text: Title + ' | ' + ClientName">
+
+                                   </span>
+                    </a>   <span class="badge" data-bind="text: Id"></span>
+                </li>
+                
+            </ul>
+        </div>
+   
+    </body>
+@section Scripts{
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/app")
+}
 </html>

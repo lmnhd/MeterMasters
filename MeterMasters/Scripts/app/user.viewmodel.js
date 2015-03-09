@@ -7,6 +7,7 @@ function MixRequest() {
     self.clientId = ko.observable(0);
     self.clientUserId = ko.observable(0);
     self.title = ko.observable('ttttt');
+    self.clientName = ko.observable('');
     self.uploadLink = ko.observable('');
     self.canModifySounds = ko.observable(false);
     self.genre = ko.observable('');

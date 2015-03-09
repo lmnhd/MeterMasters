@@ -98,6 +98,10 @@
     <Compile Include="Migrations\201503052055451_AddMixCostItemization.Designer.cs">
       <DependentUpon>201503052055451_AddMixCostItemization.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503080305593_AddedClientName.cs" />
+    <Compile Include="Migrations\201503080305593_AddedClientName.Designer.cs">
+      <DependentUpon>201503080305593_AddedClientName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -141,6 +145,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503052055451_AddMixCostItemization.resx">
       <DependentUpon>201503052055451_AddMixCostItemization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503080305593_AddedClientName.resx">
+      <DependentUpon>201503080305593_AddedClientName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

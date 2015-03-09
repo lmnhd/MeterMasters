@@ -61,6 +61,10 @@ namespace MeterMasters.Controllers
         public GetViewModel Profile()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
+            if (user == null)
+            {
+                return null;
+            }
             var client = _unit.GetClient(user.Id,true);
             var requests = _unit.GetMixRequests(client.UserId);
             

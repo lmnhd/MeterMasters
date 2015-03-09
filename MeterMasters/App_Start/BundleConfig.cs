@@ -29,6 +29,7 @@ namespace MeterMasters
                 "~/Scripts/app/app.viewmodel.js",
                 "~/Scripts/app/user.viewmodel.js",
                 "~/Scripts/app/home.viewmodel.js",
+                "~/Scripts/app/admin.viewmodel.js",
                 "~/Scripts/app/_run.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

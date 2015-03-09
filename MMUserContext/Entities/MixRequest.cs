@@ -57,6 +57,7 @@ namespace MMUserContext.Entities
         public virtual string Title { get; set; }
         public virtual string UploadLink { get; set; }
         public virtual bool CanModifySounds { get; set; }
+        public virtual string ClientName { get; set; }
         public virtual string Genre { get; set; }
         public virtual string ModifyNotes { get; set; }
         public virtual string ClientNotes { get; set; }

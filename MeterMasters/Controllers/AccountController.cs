@@ -175,6 +175,7 @@ namespace MeterMasters.Controllers
                
                 if (result.Succeeded)
                 {
+                    UserManager.AddToRole(user.Id, "Users");
                     _unit.StoreClient(user.Id, user.UserName,user.Hometown);
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 

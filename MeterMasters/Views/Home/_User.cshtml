@@ -15,6 +15,7 @@
             <form id="client-info" class="" action="#/UpdateInfo" method="POST">
                 <input type="hidden" data-bind="value: userID" name="userid" />
                 <input type="hidden" data-bind="value: clientID" name="id" />
+                
                 <div class="form-group">
                     @Html.Label("Name")
                     @Html.TextBox("Name", "", new { data_bind = "value: userName", @class = "form-control" })
@@ -71,7 +72,7 @@
             <form id="request-info" class="" action="#/submitmix" method="POST" data-bind="with: currentRequest">
                 <input type="hidden" data-bind="value: $parent.userID" name="clientUserId" />
                 <input type="hidden" data-bind="value: $parent.clientID" name="clientId" />
-
+                <input type="hidden" data-bind="value: $parent.userName" name="clientName" />
                 <div class="form-group">
                     @Html.Label("Song/Track Title")
                     @*<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>*@

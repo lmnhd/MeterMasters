@@ -297,6 +297,16 @@ body {
     animation-iteration-count: infinite;
 }
 
+.admin-body ul{
+    color:black;
+   
+}
+.admin-request-list{
+     max-height:100px;
+     overflow-y:scroll;
+
+}
+
 .visible{
     display:block;
 

@@ -1,0 +1,18 @@
+namespace MMUserContext.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class AddedClientName : DbMigration
+    {
+        public override void Up()
+        {
+            AddColumn("dbo.MixRequests", "ClientName", c => c.String());
+        }
+        
+        public override void Down()
+        {
+            DropColumn("dbo.MixRequests", "ClientName");
+        }
+    }
+}

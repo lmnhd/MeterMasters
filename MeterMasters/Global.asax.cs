@@ -31,8 +31,8 @@ namespace MeterMasters
             context.Database.Initialize(false);
             
 
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            roleManager.Create(new IdentityRole("Admin"));
+            //var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+           // roleManager.Create(new IdentityRole("Admin"));
             
             
 

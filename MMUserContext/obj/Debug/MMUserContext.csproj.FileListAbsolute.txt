@@ -5,7 +5,6 @@ E:\Users\New User\Documents\GitHub\MeterMasters\MMUserContext\bin\Debug\EntityFr
 E:\Users\New User\Documents\GitHub\MeterMasters\MMUserContext\bin\Debug\EntityFramework.SqlServer.dll
 E:\Users\New User\Documents\GitHub\MeterMasters\MMUserContext\bin\Debug\EntityFramework.xml
 E:\Users\New User\Documents\GitHub\MeterMasters\MMUserContext\bin\Debug\EntityFramework.SqlServer.xml
-E:\Users\New User\Documents\GitHub\MeterMasters\MMUserContext\obj\Debug\MMUserContext.csprojResolveAssemblyReference.cache
 E:\Users\New User\Documents\GitHub\MeterMasters\MMUserContext\obj\Debug\MMUserContext.dll
 E:\Users\New User\Documents\GitHub\MeterMasters\MMUserContext\obj\Debug\MMUserContext.pdb
 E:\Users\New User\Documents\GitHub\MeterMasters\MMUserContext\obj\Debug\MMUserContext.Migrations.InitialCreate.resources
@@ -22,3 +21,5 @@ E:\Users\New User\Documents\GitHub\MeterMasters\MMUserContext\obj\Debug\MMUserCo
 E:\Users\New User\Documents\GitHub\MeterMasters\MMUserContext\obj\Debug\MMUserContext.Migrations.AddRequests.resources
 E:\Users\New User\Documents\GitHub\MeterMasters\MMUserContext\obj\Debug\MMUserContext.Migrations.AddActiveRequest.resources
 E:\Users\New User\Documents\GitHub\MeterMasters\MMUserContext\obj\Debug\MMUserContext.Migrations.AddMixCostItemization.resources
+E:\Users\New User\Documents\GitHub\MeterMasters\MMUserContext\obj\Debug\MMUserContext.csprojResolveAssemblyReference.cache
+E:\Users\New User\Documents\GitHub\MeterMasters\MMUserContext\obj\Debug\MMUserContext.Migrations.AddedClientName.resources
