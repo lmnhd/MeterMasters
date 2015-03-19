@@ -125,8 +125,25 @@ body {
   width: 50%;
   color: red; }
 
+.align-right {
+  text-align: right;
+  margin-left: auto;
+  margin-right: 5px; }
+
+.stick-left {
+  left: 13px;
+  margin-left: 0;
+  position: absolute;
+  text-align: left; }
+
+.admin-lg {
+  min-width: 600px; }
+
 .infotext {
   font-size: medium; }
+
+.admin-list {
+  text-align: right; }
 
 .bigmessage img, .bigmessageleft img {
   display: inline-block;

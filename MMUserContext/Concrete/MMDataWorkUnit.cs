@@ -167,5 +167,15 @@ namespace MMUserContext.Concrete
 
             return result.ToList();
         }
+
+        public void acceptRequest(MixRequest request)
+        {
+            if (request.AcceptanceTime.Equals(request.EntryTime))
+            {
+                request.AcceptanceTime = DateTime.Now;
+                userContext.Entry(request).State = EntityState.Modified;
+                userContext.SaveChanges();
+            }
+        }
     }
 }

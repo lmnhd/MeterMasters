@@ -16,20 +16,50 @@
        
         <h1 data-bind="text: header"></h1>
         <div class="admin-request-list">
-            <ul class="list-group" data-bind="foreach: requests">
+            <ul class="list-group admin-lg" data-bind="foreach: requests">
                 
-                <li class="list-group-item ">
-                    <span data-bind="text: $parent.getFormattedDate(EntryTime)"></span>
+                <li class="list-group-item admin-list">
+                    <span class="stick-left" data-bind="text: $parent.getFormattedDate(entryTime)"></span>
 
-                    <a class="btn"><span data-bind="text: Title + ' | ' + ClientName">
+                    <a class="btn btn-primary align-right" >
+                        <span data-bind="text: title + ' | ' + clientName, click: $parent.setCurrentRequest($data)">
 
-                                   </span>
-                    </a>   <span class="badge" data-bind="text: Id"></span>
+                        </span>
+                    </a>   <span class="badge" data-bind="text: id"></span>
                 </li>
                 
             </ul>
         </div>
-   
+        <div data-bind="with: currentRequest,visible: requests().length > 0">
+            <div class="form-control-static">
+                <label class="label label-primary">Client Name</label>
+                <p data-bind="text: clientName"></p>
+            </div>
+            <div class="form-control-static">
+                <label class="label label-primary">Song/Track Title</label>
+                <p data-bind="text: title"></p>
+            </div>
+            <div class="form-control-static">
+                <label class="label label-primary">Archive Link</label>
+                <a data-bind="attr: {href: uploadLink, target: '_blank'},text: uploadLink"></a>
+            </div>
+            <div class="form-control-static">
+                <label class="label label-primary">
+                    Can Modify Sounds
+                </label>
+                <p data-bind="text: canModifySounds ? 'Yes' : 'No', style: {color: canModifySounds ? 'green' : 'red'}"></p>
+            </div>
+            <div class="form-control-static" data-bind="visible: canModifySounds">
+                <label class="label label-primary">
+                    Modify Exceptions
+                </label>
+                <p data-bind="text: modifyNotes ? modifyNotes : 'None'"></p>
+            </div>
+            <div class="form-control-static" data-bind="visible: $parent.accepted($data)" >
+                <button class="btn btn-primary" 
+                        data-bind="click: $parent.acceptRequest">Accept</button>
+            </div>
+        </div>
     </body>
 @section Scripts{
     @Scripts.Render("~/bundles/knockout")

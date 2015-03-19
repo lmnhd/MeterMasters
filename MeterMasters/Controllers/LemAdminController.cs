@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+//using System.Web.Http;
 using System.Web.Http.Results;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
@@ -11,7 +12,7 @@ using Newtonsoft.Json;
 
 namespace MeterMasters.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [System.Web.Mvc.Authorize(Roles = "Admin")]
     public class LemAdminController : Controller
     {
         private ApplicationUserManager _userManager;
@@ -58,15 +59,7 @@ namespace MeterMasters.Controllers
             }
         }
 
-        [HttpPost]
-        //[Route("GetAllRequests")]
-        public ActionResult GetAllRequests()
-        {
-            //return JsonConvert.SerializeObject(_unit.GetPendingRequests());
-            var result = _unit.GetPendingRequests();
-            result.Sort(new RequestComparer() );
-            return Json(result);
-        } 
+       
     }
 
 }

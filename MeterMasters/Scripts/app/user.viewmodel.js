@@ -18,6 +18,7 @@ function MixRequest() {
     self.ArchiveType = ko.observable(1);
     self.DAW = ko.observable(1);
     self.acceptanceTime = ko.observable(new Date());
+    
     self.MixTypeChoices = ko.observableArray(['FullTracks', 'VocalsOnly', 'TrackOnly']);
     self.myMixType = ko.observable(0);
     self.VersionTypes = ko.observableArray(['Instrumental', 'Acapella', 'ShowVersion', 'Special']);

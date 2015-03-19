@@ -139,13 +139,33 @@ namespace MeterMasters.Controllers
         [Route("api/Me/SubmitMix")]
         public MixRequest SubmitMix(MixRequest request)
         {
-            request.EntryTime = DateTime.Now;
-            request.AcceptanceTime = DateTime.Now;
+            var now = DateTime.Now;
+            request.EntryTime = now;
+            request.AcceptanceTime = now;
             request.MixCancelled = false;
             request.MixComplete = false;
             request.Active = true;
             
            return _unit.StoreMixRequest(request);
+        }
+
+        [HttpPost]
+        [Route("api/Me/GetAllRequests")]
+        public List<MixRequest> GetAllRequests()
+        {
+            //return JsonConvert.SerializeObject(_unit.GetPendingRequests());
+            var result = _unit.GetPendingRequests();
+            result.Sort(new LemAdminController.RequestComparer());
+            return result;
+        }
+
+        [HttpPost]
+        [Route("api/Me/acceptRequest")]
+        public int acceptRequest(MixRequest request)
+        {
+
+            _unit.acceptRequest(request);
+            return 0;
         }
     }
 }
